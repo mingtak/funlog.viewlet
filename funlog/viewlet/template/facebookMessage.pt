@@ -1,0 +1,16 @@
+<!-- 未完成，下面的script要重新設定才能正常使用 -->
+<div class="facebook_comments">
+
+<!-- facebook comments -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=967293819948043&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-comments" tal:attributes="data-href context/absolute_url"
+     data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+
+</div>

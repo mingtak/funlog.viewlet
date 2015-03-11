@@ -1,0 +1,6 @@
+<tal:check condition="python:view.brain[0].agreeBanner">
+<div class="adscript">
+  <tal:ad content="structure python:view.brain[0].adScript" />
+  <br />
+</div>
+</tal:check>

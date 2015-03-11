@@ -1,0 +1,19 @@
+<tal:slideShow define="profile view/profile;
+                       slide_1 string:${profile/getURL}/@@images/coverImage_1/slide;
+                       slide_2 string:${profile/getURL}/@@images/coverImage_2/slide;
+                       slide_3 string:${profile/getURL}/@@images/coverImage_3/slide;
+                       slide_4 string:${profile/getURL}/@@images/coverImage_4/slide;
+                       slide_5 string:${profile/getURL}/@@images/coverImage_5/slide;
+                       slideList python:[slide_1, slide_2, slide_3, slide_4, slide_5]">
+  <ul id="funlog-slide-banner">
+    <li tal:repeat="item slideList">
+      <img tal:attributes="src item" />
+      <div tal:condition="repeat/item/start"
+           tal:content="view/profile/blogName"
+           id="slide-show-blog-title" />
+      <div tal:condition="repeat/item/start"
+           tal:content="structure python:view.profile.blogDescription.replace('\n', '<br>')"
+           id="slide-show-blog-description" />
+    </li>
+  </ul>
+</tal:slideShow>

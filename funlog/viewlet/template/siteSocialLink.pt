@@ -1,0 +1,11 @@
+<div i18n:domain="funlog.viewlet" >
+  <div id="funlog_viewlet_registry">
+    <p class="title" i18n:translate="">Follow us</p>
+    <p class="facebook" tal:condition="view/facebookUrl" tal:content="view/facebookUrl">fb</p>
+    <p class="twitter" tal:condition="view/twitterUrl" tal:content="view/twitterUrl"></p>
+    <p class="email" tal:condition="view/email" tal:content="view/email"></p>
+    <p class="googleplus" tal:condition="view/googlePlusUrl" tal:content="view/googlePlusUrl"></p>
+    <p class="linkedin" tal:condition="view/linkedIn" tal:content="view/linkedIn"></p>
+  </div>
+</div>
+

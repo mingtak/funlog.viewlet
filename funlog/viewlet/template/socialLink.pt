@@ -1,0 +1,23 @@
+<div tal:define="item view/profile" id="funlog-social-link">
+  <a class="email"
+     tal:condition="python:item.email is not None"
+     tal:attributes="href string:mailto:${item/email}" />
+  <a class="webpage"
+     tal:condition="python:item.webPage is not None"
+     tal:attributes="href item/webPage" />
+  <a class="facebook"
+     tal:condition="python:item.fbUrl is not None"
+     tal:attributes="href item/fbUrl" />
+  <a class="google-plus"
+     tal:condition="python:item.gPlusUrl is not None"
+     tal:attributes="href item/gPlusUrl" />
+  <a class="linkedin"
+     tal:condition="python:item.linkedInUrl is not None"
+     tal:attributes="href item/linkedInUrl" />
+  <a class="twitter"
+     tal:condition="python:item.twitterUrl is not None"
+     tal:attributes="href item/twitterUrl" />
+  <tal:hello condition="python:view.currentUser.id == view.ownerId">
+    <strong>hi</strong><span tal:content="view/profile/Title"></span>
+  </tal:hello>
+</div>

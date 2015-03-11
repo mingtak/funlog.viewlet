@@ -1,0 +1,111 @@
+<nav i18n:domain="funlog.viewlet" id="funlog-menu" tal:condition="not:view/isManager">
+
+  <ul id="funlog-menu-ul">
+
+    <li tal:attributes="class python:'top-level-menu %s' %
+                              ('selected' if context.Type()=='Folder' and not hasattr(request, 'type') else '')">
+      <a tal:attributes="href view/funlogRootFolder/getURL" i18n:translate="">Funlog</a>
+      <ul>
+        <li tal:repeat="item python:view.latestContent[:5]">
+          <a tal:attributes="href item/getURL" tal:content="item/Title" />
+        </li>
+        <li tal:condition="python:len(view.latestContent)>5">
+          <a tal:attributes="href view/funlogRootFolder/getURL" i18n:translate="">see all content list</a>
+        </li>
+      </ul>
+    </li>
+
+    <li tal:attributes="class python:'top-level-menu %s' % 
+                              ('selected' if context.Type()=='Article' or getattr(request, 'type', '')=='Article' else '')">
+      <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Article" i18n:translate="">Article</a>
+      <ul>
+        <li tal:repeat="item python:view.latestArticle[:5]">
+          <a tal:attributes="href item/getURL" tal:content="item/Title" />
+        </li>
+        <li tal:condition="python:len(view.latestArticle)>5">
+          <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Article" i18n:translate="">see all article list</a>
+        </li>
+      </ul>
+    </li>
+
+    <li tal:attributes="class python:'top-level-menu %s' %
+                              ('selected' if context.Type()=='Travel' or getattr(request, 'type', '')=='Travel' else '')">
+      <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Travel" i18n:translate="">Travel</a>
+      <ul>
+        <li tal:repeat="item python:view.latestTravel[:5]">
+          <a tal:attributes="href item/getURL" tal:content="item/Title" />
+        </li>
+        <li tal:condition="python:len(view.latestTravel)>5">
+          <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Travel" i18n:translate="">see all travel list</a>
+        </li>
+      </ul>
+    </li>
+
+    <li tal:attributes="class python:'top-level-menu %s' %
+                              ('selected' if context.Type()=='Album' or getattr(request, 'type', '')=='Album' else '')">
+      <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Album" i18n:translate="">Album</a>
+      <ul>
+        <li tal:repeat="item python:view.latestAlbum[:5]">
+          <a tal:attributes="href item/getURL" tal:content="item/Title" />
+        </li>
+        <li tal:condition="python:len(view.latestAlbum)>5">
+          <a tal:attributes="href string:${view/funlogRootFolder/getURL}?type=Album" i18n:translate="">see all album list</a>
+        </li>
+      </ul>
+    </li>
+
+    <li tal:attributes="class python:'top-level-menu %s' %
+                              ('selected' if context.Type()=='Profile' or getattr(request, 'type', '')=='Profile' else '')">
+      <a tal:attributes="href string:${context/portal_url}/profile/${view/ownerId}" i18n:translate="">Profile</a>
+    </li>
+
+
+    <li class="top-level-menu manager"
+        tal:condition="python:view.currentUser.id == view.ownerId and context.Type() not in  ['Folder', 'Profile']">
+      <a>
+        <span i18n:translate="">State:</span>
+        <span tal:attributes="style python:'color:blue' if view.reviewState == 'published' else 'color:red'"
+              tal:content="view/reviewState"
+              i18n:domain="plone" i18n:translate=""></span>
+      </a>
+      <ul>
+        <li>
+        </li>
+      </ul>
+    </li>
+
+    <li class="top-level-menu" tal:condition="not:view/checkAnonymous">
+      <a i18n:translate="">Active</a>
+      <ul tal:condition="python:view.ownerId == view.currentUser.id">
+        <li tal:condition="python:context.Type() != 'Folder'">
+          <a tal:attributes="href string:${context/absolute_url}/edit" i18n:translate="">Edit this page</a>
+        </li>
+        <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.article" i18n:translate="">Add article</a></li>
+        <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.travel" i18n:translate="">Add travel</a></li>
+        <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.album" i18n:translate="">Add album</a></li>
+        <li><a tal:attributes="href string:${context/portal_url}/profile/${view/ownerId}/selecttheme" i18n:translate="">Select Theme</a></li>
+        <li>
+          <a tal:attributes="href string:${context/portal_url}/${view/profile/blogId}/@@manage-portlets" i18n:translate="">Manage Sidebar</a>
+        </li>
+        <li><a tal:attributes="href string:${context/portal_url}/logout" i18n:translate="">Logout</a></li>
+      </ul>
+      <ul tal:condition="python:view.ownerId != view.currentUser.id">
+        <li><a tal:attributes="href string:${context/portal_url}/@@to_my_funlog" i18n:translate="">To my funlog</a></li>
+      </ul>
+
+    </li>
+
+    <li class="top-level-menu" tal:condition="view/checkAnonymous">
+      <a><strong i18n:translate="">Join/Login</strong></a>
+      <ul>
+        <li>
+          <a href="/facebookLogin" i18n:translate="">
+            <i class="fa fa-facebook" style="color:#425F9C"></i> Facebook Login
+          </a>
+        </li>
+      </ul>
+    </li>
+
+  </ul>
+
+</nav>

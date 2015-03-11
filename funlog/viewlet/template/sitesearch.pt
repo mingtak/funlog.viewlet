@@ -1,0 +1,6 @@
+
+<div i18n:domain="funlog.viewlet" class="funlog_site_search">
+  <form action="/site_search" method="post">
+    <input id="funlog_site_search" name="keyword" placeholder="All site search" type="text" i18n:attributes="placeholder">
+  </form>
+</div>
