@@ -1,4 +1,4 @@
-<nav i18n:domain="funlog.viewlet" id="funlog-menu" tal:condition="not:view/isManager">
+<nav i18n:domain="funlog.viewlet" id="funlog-menu">
 
   <ul id="funlog-menu-ul">
 
@@ -83,6 +83,7 @@
         <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.article" i18n:translate="">Add article</a></li>
         <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.travel" i18n:translate="">Add travel</a></li>
         <li><a tal:attributes="href string:${context/portal_url}/${view/ownerId}/++add++funlog.content.album" i18n:translate="">Add album</a></li>
+        <li><a tal:attributes="href string:${context/portal_url}/profile/${view/ownerId}/edit" i18n:translate="">Edit profile</a></li>
         <li><a tal:attributes="href string:${context/portal_url}/profile/${view/ownerId}/selecttheme" i18n:translate="">Select Theme</a></li>
         <li>
           <a tal:attributes="href string:${context/portal_url}/${view/profile/blogId}/@@manage-portlets" i18n:translate="">Manage Sidebar</a>

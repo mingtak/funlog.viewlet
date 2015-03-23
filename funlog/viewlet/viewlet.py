@@ -21,38 +21,6 @@ class Interface_IBelowContent_SiteSearch(grok.Viewlet):
         return self.template()
 
 
-class Interface_IPortalHeader_Funlogmenu(grok.Viewlet):
-
-    grok.viewletmanager(IPortalHeader)
-    grok.context(Interface)
-    template = ViewPageTemplateFile('template/funlogMenu.pt')
-
-    def render(self):
-        catalog = self.context.portal_catalog
-        self.ownerId = self.context.owner_info()['id']
-        self.currentUser = api.user.get_current()
-        self.checkAnonymous = api.user.is_anonymous()
-#        import pdb;pdb.set_trace()
-        if not self.checkAnonymous and 'Manager' in api.user.get_roles():
-            self.isManager = True
-            return
-        self.isManager = False
-        self.funlogRootFolder = catalog({'Creator':self.ownerId, 'Type':'Folder'})[0]
-        self.latestContent = catalog({'Creator':self.ownerId, 'Type':['Travel', 'Album', 'Travel']},
-                                     sort_on="created", sort_order="reverse")
-        self.latestArticle = catalog({'Creator':self.ownerId, 'Type':'Article'},
-                                     sort_on="created", sort_order="reverse")
-        self.latestTravel = catalog({'Creator':self.ownerId, 'Type':'Travel'}, 
-                                    sort_on="created", sort_order="reverse")
-        self.latestAlbum = catalog({'Creator':self.ownerId, 'Type':'Album'}, 
-                                   sort_on="created", sort_order="reverse")
-        self.profile = catalog({'Type':'Profile', 'id':self.ownerId})
-        if len(self.profile) > 0:
-            self.profile = self.profile[0]
-        self.reviewState = api.content.get_state(obj=self.context)
-        return self.template()
-
-
 class IArticle_IBelowContent_AdScriptBanner(grok.Viewlet):
     grok.viewletmanager(IBelowContent)
     grok.context(IArticle)
@@ -100,42 +68,6 @@ class IFolder_IPortalTop_Slide(grok.Viewlet):
         self.profile = catalog({'Creator':ownerId, 'Type':'Profile'})[0]
         return self.template()
 
-"""
-class IAlbum_IPortalTop_Slide(grok.Viewlet):
-    grok.viewletmanager(IPortalTop)
-    grok.context(IAlbum)
-    template = ViewPageTemplateFile('template/slideShow.pt')
-
-    def render(self):
-        catalog = self.context.portal_catalog
-        ownerId = self.context.owner_info()['id']
-        self.profile = catalog({'Creator':ownerId, 'Type':'Profile'})[0]
-        return self.template()
-
-
-class ITravel_IPortalTop_Slide(grok.Viewlet):
-    grok.viewletmanager(IPortalTop)
-    grok.context(ITravel)
-    template = ViewPageTemplateFile('template/slideShow.pt')
-
-    def render(self):
-        catalog = self.context.portal_catalog
-        ownerId = self.context.owner_info()['id']
-        self.profile = catalog({'Creator':ownerId, 'Type':'Profile'})[0]
-        return self.template()
-
-
-class IArticle_IPortalTop_Slide(grok.Viewlet):
-    grok.viewletmanager(IPortalTop)
-    grok.context(IArticle)
-    template = ViewPageTemplateFile('template/slideShow.pt')
-
-    def render(self):
-        catalog = self.context.portal_catalog
-        ownerId = self.context.owner_info()['id']
-        self.profile = catalog({'Creator':ownerId, 'Type':'Profile'})[0]
-        return self.template()
-"""
 
 class IFolder_IPortalTop_SocialLink(grok.Viewlet):
     grok.viewletmanager(IPortalTop)
